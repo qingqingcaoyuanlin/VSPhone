@@ -46,7 +46,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Management" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -60,7 +59,19 @@
     <Compile Include="AppTimer.cs" />
     <Compile Include="ArrayDeal.cs" />
     <Compile Include="Audio.cs" />
+    <Compile Include="AutoCall.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AutoCall.Designer.cs">
+      <DependentUpon>AutoCall.cs</DependentUpon>
+    </Compile>
     <Compile Include="BcdDeal.cs" />
+    <Compile Include="CallTabPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CallTabPage.Designer.cs">
+      <DependentUpon>CallTabPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="ConnectStat.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -71,6 +82,12 @@
     <Compile Include="Local.cs" />
     <Compile Include="LocalCfg.cs" />
     <Compile Include="Output.cs" />
+    <Compile Include="Phone.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Phone.Designer.cs">
+      <DependentUpon>Phone.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -90,9 +107,18 @@
     <Compile Include="UdpDeal.cs" />
     <Compile Include="video.cs" />
     <Compile Include="VsProtocol.cs" />
+    <EmbeddedResource Include="AutoCall.resx">
+      <DependentUpon>AutoCall.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CallTabPage.resx">
+      <DependentUpon>CallTabPage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Phone.resx">
+      <DependentUpon>Phone.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
