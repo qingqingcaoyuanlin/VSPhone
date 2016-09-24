@@ -38,7 +38,7 @@ namespace VSPhone
                     Console.WriteLine("设置成功");
                 }
             }
-            /*
+            /* test
             talkback = new Talkback();
             talkback.talk_back_init();
             talkback.udpDeal.app_udp_init(8300);
