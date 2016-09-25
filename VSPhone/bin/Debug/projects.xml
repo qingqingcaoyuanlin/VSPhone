@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Projects>
+  <!--注释，模板开始-->
+  <Project Vendor="ABB" Header="123">
+    <IS>1-1-1-1</IS>
+    <OS>1-1-1</OS>
+    <MiniOS>1-1-1-1</MiniOS>
+    <GU>1</GU>
+  </Project>
+  <!--注释，模板结束-->
+  <Project Vendor="H" Header="345">
+    <IS>1-1-2-1</IS>
+    <OS>1-1-2</OS>
+    <MiniOS>1-1-1-2</MiniOS>
+    <GU>2</GU>
+  </Project>
+  <Project Vendor="616" Header="567">
+    <IS>1-1-2-2</IS>
+    <OS>1-1-2</OS>
+    <MiniOS>1-1-2-2</MiniOS>
+    <GU>3</GU>
+  </Project>
+  <Project Vendor="ABB" Header="1234">
+    <IS />
+    <OS />
+    <MiniOS />
+    <GU />
+  </Project>
+  <Project Vendor="AAA" Header="AAA">
+    <IS>AAA</IS>
+    <OS>AAA</OS>
+    <MiniOS>AAA</MiniOS>
+    <GU>AAA</GU>
+  </Project>
+  <Project Vendor="BBB" Header="AAA">
+    <IS>BBB</IS>
+    <MiniOS>BBB</MiniOS>
+    <GU>BBB</GU>
+  </Project>
+  <Project Vendor="BBB" Header="AAA">
+    <IS>BBB</IS>
+    <MiniOS>BBB</MiniOS>
+    <GU>BBB</GU>
+  </Project>
+  <Project Vendor="123" Header="321">
+    <IS>123</IS>
+    <MiniOS>123</MiniOS>
+    <GU />
+  </Project>
+  <Project Vendor="CCC" Header="ASA">
+    <IS>1234</IS>
+  </Project>
+</Projects>

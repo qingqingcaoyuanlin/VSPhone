@@ -13,8 +13,8 @@ using System.IO;
 
 namespace VSPhone
 {
-    public partial class Phone : UserControl
-    //public partial class Phone : Form
+    //public partial class Phone : UserControl
+    public partial class Phone : Form
     {
         public  byte[] PublicHead;
         public Phone()
@@ -104,21 +104,7 @@ namespace VSPhone
                 {
                     MessageBox.Show("请输入Header");
                     return;
-                }
-                /*
-                string text = textBox_Header.Text.ToString();
-                PublicHead = Encoding.UTF8.GetBytes(text);
-                */
-                //PublicHead = new byte[] { 0x47, 0x56, 0x53, 0x38, 0x30, 0x31, 0xce, 0xcf, 0xc8, 0x0};
-                /*
-                string[] numbers = textBox3.Text.Split(' ');
-                for(int i=0; i<10; i++)
-                {
-                    String hex = numbers[i];
-                    PublicHead[i] = Convert.ToByte(hex, 16);
-                    Console.WriteLine(PublicHead[i]);
-                }
-                */
+                }                
                 byte[] callId = new byte[] { (byte)VsProtocol.DevType.DEV_INDOORPHONE, Convert.ToByte(num[0]), Convert.ToByte(num[1]), Convert.ToByte(num[2]), Convert.ToByte(num[3]), 1 };
                 talkback.call_out(callId, 0, null);
             }
@@ -266,27 +252,7 @@ namespace VSPhone
                     int i = 0;
                     string[] Line = new string[40];
                     List<itemObject> items = new List<itemObject>();
-                    /*
-                
-                    int j = 0;
-                
-                
-                    string[] Head = new string[30];
-                    string[] itemname = new string[10];
-                    while (line != null)
-                    {
-
-                        Line = line.Split('/');
-                        Head[i] = Line[0];
-                        itemname[i] = Line[1];
-                        Console.WriteLine(Head[i]);
-                        Console.WriteLine(itemname[i]);
-                        comboBox1.Items.Clear();
-                        comboBox1.Items.Add();
-                        i++;
-                        line = reader.ReadLine();
-                    }
-                    */
+                    
                     itemObject itemTemp = new itemObject();
                     while (line != null)
                     {

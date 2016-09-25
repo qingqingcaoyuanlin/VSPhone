@@ -7,16 +7,32 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
+using System.Net;
 namespace VSPhone
-{
-    public partial class CallTabPage : UserControl
+{   
+    public partial class CallTabPage : Form
     {
+        public byte[] PublicHead;
         public CallTabPage()
         {
             InitializeComponent();
+            
+            AppTimer.app_timer_init();
+            Remoter.Remoter_init();
+            LocalCfg.Addr = new byte[] { (byte)VsProtocol.DevType.DEV_INDOORPHONE, 1, 1, 8, 8, 1 };
+            VsProtocol.Change_IDToIP(LocalCfg.Addr, LocalCfg.IP);
+            talkback = new Talkback();
+            talkback.talk_back_init();
+            talkback.udpDeal.app_udp_init(8300);
+            talkback.udpDeal.set_multi_udp_recv_fun(UdpApp.udp_deal);
+            talkback.videoDeal.video_manage.video_recv_callback = videoCallback;
+            UdpApp.UdpAppInit(talkback);
+            label1.Text = new IPAddress(LocalCfg.IP).ToString();
+            Output.outObject = richTextBox1;
+            
         }
-        Phone Phone1;
-        AutoCall autoCall;
+        public Talkback talkback;
+        
         private void InitSetting()
         {
             string fname = Directory.GetCurrentDirectory() + "\\voice.txt";
@@ -87,7 +103,7 @@ namespace VSPhone
                 }
                
                 byte[] callId = new byte[] { (byte)VsProtocol.DevType.DEV_INDOORPHONE, Convert.ToByte(num[0]), Convert.ToByte(num[1]), Convert.ToByte(num[2]), Convert.ToByte(num[3]), 1 };
-                Phone1.talkback.call_out(callId, 0, null);
+                talkback.call_out(callId, 0, null);
                 
             }
             catch
@@ -107,12 +123,12 @@ namespace VSPhone
                 if (num.Length == 3)
                 {
                     byte[] callId = new byte[] { (byte)VsProtocol.DevType.DEV_DOORSTATION, Convert.ToByte(num[0]), Convert.ToByte(num[1]), 0, Convert.ToByte(num[2]), 1 };
-                    Phone1.talkback.build_monitor(callId);
+                    talkback.build_monitor(callId);
                 }
                 else if (num.Length == 4)
                 {
                     byte[] callId = new byte[] { (byte)VsProtocol.DevType.DEV_SECONDOORSTATION, Convert.ToByte(num[0]), Convert.ToByte(num[1]), Convert.ToByte(num[2]), Convert.ToByte(num[3]), 1 };
-                    Phone1.talkback.build_monitor(callId);
+                    talkback.build_monitor(callId);
                 }
                 else
                 {
@@ -141,7 +157,7 @@ namespace VSPhone
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Phone1.talkback.pick();
+            talkback.pick();
             //talkback.audioDeal.playPath = textBox2.Text;
         }
 
@@ -246,7 +262,7 @@ namespace VSPhone
                     if (comboBox1.Items.Count > 0)
                     {
                         comboBox1.SelectedIndex = 0;
-                        Phone1.talkback.audioDeal.projName = comboBox1.SelectedItem.ToString();
+                        talkback.audioDeal.projName = comboBox1.SelectedItem.ToString();
                     }
                     file.Close();
                 }
@@ -272,9 +288,9 @@ namespace VSPhone
                     Console.WriteLine(temp[i]);
 
                 }
-                Phone1.PublicHead = temp;
+                PublicHead = temp;
                 textBox_Header.Text = head;
-                Phone1.talkback.audioDeal.projName = object1.ToString();
+                talkback.audioDeal.projName = object1.ToString();
 
             }
             else
@@ -286,21 +302,23 @@ namespace VSPhone
 
         void videoCallback(Video.VIDEO_RECV_BUFF video_recv_buff)
         {
-            autoCall.pictureBox1.Invoke(new MethodInvoker(delegate
+            /*
+            pictureBox1.Invoke(new MethodInvoker(delegate
             {
-                if (autoCall.pictureBox1.Image != null)
-                    autoCall.pictureBox1.Image.Dispose();
+                if (pictureBox1.Image != null)
+                    pictureBox1.Image.Dispose();
                 MemoryStream ms = new MemoryStream();
                 ms.Write(video_recv_buff.buff, 0, video_recv_buff.len);
-                autoCall.pictureBox1.Image = new Bitmap(ms);
+                pictureBox1.Image = new Bitmap(ms);
                 ms.Close();
                 video_recv_buff.idel_flag = 1;
             }));
+             */
         }
 
         private void button5_Click_1(object sender, EventArgs e)
         {
-            Phone1.talkback.call_out(LocalCfg.Addr_GuardUnit, 0, null);
+            talkback.call_out(LocalCfg.Addr_GuardUnit, 0, null);
             //talkback.audioDeal.playPath = textBox2.Text;
             Output.MessaggeOutput("呼叫管理机 ");
         }
@@ -309,12 +327,12 @@ namespace VSPhone
         {
             if (ConnectStat.NewCallFlag > 0)
             {
-                Phone1.talkback.handup(0, 1);
+                talkback.handup(0, 1);
                 //Change_To_NewCall_Ring();
             }
             else
             {
-                Phone1.talkback.handup(0, 0);
+                talkback.handup(0, 0);
             }
             Output.MessaggeOutput("挂机 ");
         }
@@ -332,7 +350,7 @@ namespace VSPhone
             {
                 if (wavfile.Exists)
                 {
-                    Phone1.talkback.audioDeal.playPath = wavname;
+                    talkback.audioDeal.playPath = wavname;
                 }
                 else
                 {
@@ -341,7 +359,7 @@ namespace VSPhone
             }
             else
             {
-                Phone1.talkback.audioDeal.playPath = null;
+                talkback.audioDeal.playPath = null;
             }
         }
     }

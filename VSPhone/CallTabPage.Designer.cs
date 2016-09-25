@@ -199,6 +199,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(309, 455);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.button7);
@@ -216,8 +217,8 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "CallTabPage";
-            this.Size = new System.Drawing.Size(318, 455);
             this.ResumeLayout(false);
             this.PerformLayout();
 

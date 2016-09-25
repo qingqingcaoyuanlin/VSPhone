@@ -19,8 +19,8 @@ namespace VSPhone
     public partial class Form1 : Form
     {
         public static byte[] PublicHead;
-        Phone Phone1 = new Phone();
-        AutoCall autoCall = new AutoCall();
+        //public Phone Phone1 = new Phone();
+        public AutoCall autoCall = new AutoCall();
         public Form1()
         {
             InitializeComponent();
@@ -34,11 +34,15 @@ namespace VSPhone
             tabPage1.Name = "VoiceTest";
             tabPage1.Controls.Add(Phone1);            
             Phone1.Show();
-             */
+             * */
+            
             tabPage1.Text = "声音测试";
             tabPage1.Name = "VoiceTest";
+            autoCall.TopLevel = false;
             tabPage1.Controls.Add(autoCall);
             autoCall.Show();
+
+            ReadXML xml = new ReadXML();  
             
         }
         
