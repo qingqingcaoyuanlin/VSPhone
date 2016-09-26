@@ -299,7 +299,8 @@ namespace VSPhone
             public byte[] data;
             public Pack(byte[] dstAddr,int com)
             {
-                PublicHead = Form1.PublicHead;
+                //PublicHead = Form1.PublicHead;      //此处需修改
+                PublicHead = CallTabPage.PublicHead;
                 SourceAddr = LocalCfg.Addr;
                 DestAddr = dstAddr;
                 FunCode = com >> 8;

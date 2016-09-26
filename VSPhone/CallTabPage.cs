@@ -12,7 +12,7 @@ namespace VSPhone
 {   
     public partial class CallTabPage : Form
     {
-        public byte[] PublicHead;
+        public static byte[] PublicHead;
         public CallTabPage()
         {
             InitializeComponent();
@@ -29,7 +29,7 @@ namespace VSPhone
             UdpApp.UdpAppInit(talkback);
             label1.Text = new IPAddress(LocalCfg.IP).ToString();
             Output.outObject = richTextBox1;
-            
+            InitSetting();
         }
         public Talkback talkback;
         
@@ -91,6 +91,7 @@ namespace VSPhone
             }
 
         }
+
         private void button1_Click(object sender, EventArgs e)
         {
             try
@@ -101,10 +102,10 @@ namespace VSPhone
                     MessageBox.Show("请输入Header");
                     return;
                 }
-               
+
                 byte[] callId = new byte[] { (byte)VsProtocol.DevType.DEV_INDOORPHONE, Convert.ToByte(num[0]), Convert.ToByte(num[1]), Convert.ToByte(num[2]), Convert.ToByte(num[3]), 1 };
                 talkback.call_out(callId, 0, null);
-                
+
             }
             catch
             {
@@ -151,8 +152,6 @@ namespace VSPhone
             {
                 Output.MessaggeOutput("监视小门口机 :" + textBox1.Text);
             }
-
-
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -160,6 +159,10 @@ namespace VSPhone
             talkback.pick();
             //talkback.audioDeal.playPath = textBox2.Text;
         }
+
+        
+
+        
 
         private void button4_Click(object sender, EventArgs e)
         {
@@ -191,19 +194,12 @@ namespace VSPhone
             
             }
             */
-        }      
+        }
         private void button5_Click(object sender, EventArgs e)
         {
-            //   Device dv = new Device();
-            //   dv.SetCooperativeLevel(sender as Control, CooperativeLevel.Normal);
-            //   SecondaryBuffer buf = null;
-            //Microsoft.DirectX.DirectSound.
-            try
-            {
-                //        buf = new SecondaryBuffer("E:\\xx.wav", dv);
-            }
-            catch { }
-            //    buf.Play(0,BufferPlayFlags.Looping);
+            talkback.call_out(LocalCfg.Addr_GuardUnit, 0, null);
+            talkback.audioDeal.playPath = textBox2.Text;
+            Output.MessaggeOutput("呼叫管理机 ");
         }
         public class itemObject
         {
@@ -243,12 +239,12 @@ namespace VSPhone
                     int i = 0;
                     string[] Line = new string[40];
                     List<itemObject> items = new List<itemObject>();
-                    
+
                     itemObject itemTemp = new itemObject();
                     while (line != null)
                     {
                         Line = line.Split('/');
-                        
+
                         itemTemp = new itemObject(Line[1], Line[0]);
                         items.Add(itemTemp);
                         Console.WriteLine(itemTemp.Text);
@@ -270,6 +266,60 @@ namespace VSPhone
                 {
                     Output.MessaggeOutput("Exception");
                 }
+            }
+        }
+        private void button7_Click(object sender, EventArgs e)
+        {
+            if (ConnectStat.NewCallFlag > 0)
+            {
+                talkback.handup(0, 1);
+                //Change_To_NewCall_Ring();
+            }
+            else
+            {
+                talkback.handup(0, 0);
+            }
+            Output.MessaggeOutput("挂机 ");
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text = "";
+        }
+        void videoCallback(Video.VIDEO_RECV_BUFF video_recv_buff)
+        {
+            /*
+            pictureBox1.Invoke(new MethodInvoker(delegate
+            {
+                if (pictureBox1.Image != null)
+                    pictureBox1.Image.Dispose();
+                MemoryStream ms = new MemoryStream();
+                ms.Write(video_recv_buff.buff, 0, video_recv_buff.len);
+                pictureBox1.Image = new Bitmap(ms);
+                ms.Close();
+                video_recv_buff.idel_flag = 1;
+            }));
+             */
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            string wavname = textBox2.Text;
+            FileInfo wavfile = new FileInfo(wavname);
+            if (checkBox1.Checked)
+            {
+                if (wavfile.Exists)
+                {
+                    talkback.audioDeal.playPath = wavname;
+                }
+                else
+                {
+                    MessageBox.Show("语言文件不存在");
+                }
+            }
+            else
+            {
+                talkback.audioDeal.playPath = null;
             }
         }
 
@@ -300,67 +350,5 @@ namespace VSPhone
             }
         }
 
-        void videoCallback(Video.VIDEO_RECV_BUFF video_recv_buff)
-        {
-            /*
-            pictureBox1.Invoke(new MethodInvoker(delegate
-            {
-                if (pictureBox1.Image != null)
-                    pictureBox1.Image.Dispose();
-                MemoryStream ms = new MemoryStream();
-                ms.Write(video_recv_buff.buff, 0, video_recv_buff.len);
-                pictureBox1.Image = new Bitmap(ms);
-                ms.Close();
-                video_recv_buff.idel_flag = 1;
-            }));
-             */
-        }
-
-        private void button5_Click_1(object sender, EventArgs e)
-        {
-            talkback.call_out(LocalCfg.Addr_GuardUnit, 0, null);
-            //talkback.audioDeal.playPath = textBox2.Text;
-            Output.MessaggeOutput("呼叫管理机 ");
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            if (ConnectStat.NewCallFlag > 0)
-            {
-                talkback.handup(0, 1);
-                //Change_To_NewCall_Ring();
-            }
-            else
-            {
-                talkback.handup(0, 0);
-            }
-            Output.MessaggeOutput("挂机 ");
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text = "";
-        }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            string wavname = textBox2.Text;
-            FileInfo wavfile = new FileInfo(wavname);
-            if (checkBox1.Checked)
-            {
-                if (wavfile.Exists)
-                {
-                    talkback.audioDeal.playPath = wavname;
-                }
-                else
-                {
-                    MessageBox.Show("语言文件不存在");
-                }
-            }
-            else
-            {
-                talkback.audioDeal.playPath = null;
-            }
-        }
     }
 }

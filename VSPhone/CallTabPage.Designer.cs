@@ -56,6 +56,7 @@
             this.button8.TabIndex = 52;
             this.button8.Text = "清空";
             this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // checkBox1
             // 
@@ -65,6 +66,7 @@
             this.checkBox1.Size = new System.Drawing.Size(15, 14);
             this.checkBox1.TabIndex = 51;
             this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // button7
             // 
@@ -74,6 +76,7 @@
             this.button7.TabIndex = 50;
             this.button7.Text = "挂机";
             this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // button5
             // 
@@ -83,6 +86,7 @@
             this.button5.TabIndex = 49;
             this.button5.Text = "管理机";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button6
             // 
@@ -92,6 +96,7 @@
             this.button6.TabIndex = 48;
             this.button6.Text = "配置";
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // textBox3
             // 
@@ -107,6 +112,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(100, 20);
             this.comboBox1.TabIndex = 46;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // textBox_Header
             // 
@@ -140,6 +146,7 @@
             this.button4.TabIndex = 42;
             this.button4.Text = "打开";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // textBox2
             // 
@@ -156,6 +163,7 @@
             this.button3.TabIndex = 40;
             this.button3.Text = "摘机";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button2
             // 
@@ -165,6 +173,7 @@
             this.button2.TabIndex = 39;
             this.button2.Text = "监控";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // textBox1
             // 
@@ -181,6 +190,7 @@
             this.button1.TabIndex = 37;
             this.button1.Text = "呼叫";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1
             // 

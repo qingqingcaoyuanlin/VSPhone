@@ -42,7 +42,8 @@ namespace VSPhone
             tabPage1.Controls.Add(autoCall);
             autoCall.Show();
 
-            ReadXML xml = new ReadXML();  
+            ReadXML xml = new ReadXML();
+            
             
         }
         

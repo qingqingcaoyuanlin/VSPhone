@@ -88,12 +88,6 @@
     <Compile Include="Local.cs" />
     <Compile Include="LocalCfg.cs" />
     <Compile Include="Output.cs" />
-    <Compile Include="Phone.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Phone.Designer.cs">
-      <DependentUpon>Phone.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -132,9 +126,6 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Phone.resx">
-      <DependentUpon>Phone.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

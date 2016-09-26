@@ -23,5 +23,15 @@ namespace VSPhone
         {
             int CallTime = trackBar1.Value;
         }
+
+        private void button1_Click(object sender, EventArgs e)  //开始键
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)  //结束键
+        {
+
+        }
     }
 }
