@@ -46,7 +46,7 @@ namespace VSPhone
             
         }
 
-        public const string dbName = "VSPhone";
+        public const string dbName = "vsphone";
         public bool Check_SqlServer()
         {
             Console.WriteLine("sqlserver");
@@ -79,13 +79,21 @@ namespace VSPhone
         {
             
             
-            string connstr = "server=127.0.0.1;user id=sa;pwd=1234;port=3306;database=vsphone";       
+            string connstr = "server=localhost;user id=root;pwd=1234;port=3306;database="+dbName;       
             MySqlConnection sqlconn = new MySqlConnection();
             sqlconn.ConnectionString = connstr;
-            
+                      
+
             try 
             {
-                string comstr = "create database if not exists vsphone";
+                //string comstr = "create database if not exists vsphone";
+                string comstr = @"create table if not exists " + dbName +".Test1"+ @" (
+	                                        id		INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
+                                        	title		VARCHAR(255) NOT NULL,
+                                            date_added	DATETIME NOT NULL,
+	                                        content		TEXT NOT NULL,
+                                            link        VARCHAR(255) NOT NULL 
+                                        )ENGINE=MyISAM  DEFAULT CHARSET=gbk AUTO_INCREMENT=4";
                 MySqlCommand sqlcom = new MySqlCommand(comstr, sqlconn);
                 sqlconn.Open();
                 sqlcom.ExecuteNonQuery();
