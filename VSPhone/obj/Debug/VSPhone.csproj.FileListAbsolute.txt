@@ -141,3 +141,4 @@ D:\Proj\TestHouse\Test_Tools\VSPhone\VSPhone\VSPhone\obj\Debug\VSPhone.Propertie
 D:\Proj\TestHouse\Test_Tools\VSPhone\VSPhone\VSPhone\obj\Debug\VSPhone.Resource1.resources
 D:\Proj\TestHouse\Test_Tools\VSPhone\VSPhone\VSPhone\obj\Debug\VSPhone.TabAddProject.resources
 D:\Proj\TestHouse\Test_Tools\VSPhone\VSPhone\VSPhone\obj\Debug\VSPhone.csproj.GenerateResource.Cache
+D:\Proj\TestHouse\Test_Tools\VSPhone\VSPhone\VSPhone\obj\Debug\VSPhone.DeviceList.resources

@@ -45,7 +45,7 @@ namespace VSPhone
 	        set_talkback_state(STA.STA_NORMAL_STANDBY);
             talkback_manage.hand_sendtimer = AppTimer.register_timer(null, T_send_hand_ask, 0, null, HAND_INTERVAL, 0);
             talkback_manage.hand_replytimer = AppTimer.register_timer(null, T_hand_timeout, 0, null, HAND_TIMEOUT, 0);
-            talkback_manage.countdown_timer = AppTimer.register_timer(null, T_countdown_deal, 0, null, 1000, 0);
+            talkback_manage.countdown_timer = AppTimer.register_timer(null, T_countdown_deal, 0, null, 800, 0);
 	        //talkback_msg_init();
             audioDeal = new Audio(8302);
             videoDeal = new Video(8303);

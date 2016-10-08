@@ -44,6 +44,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Windows\assembly\GAC\Microsoft.DirectX.DirectSound\1.0.2902.0__31bf3856ad364e35\Microsoft.DirectX.DirectSound.dll</HintPath>
     </Reference>
+    <Reference Include="MySql.Data, Version=5.2.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\MySql.Data.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -79,6 +83,12 @@
       <DependentUpon>CallTabPage.cs</DependentUpon>
     </Compile>
     <Compile Include="ConnectStat.cs" />
+    <Compile Include="DeviceList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DeviceList.Designer.cs">
+      <DependentUpon>DeviceList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -122,6 +132,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CallTabPage.resx">
       <DependentUpon>CallTabPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DeviceList.resx">
+      <DependentUpon>DeviceList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

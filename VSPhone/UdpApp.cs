@@ -37,7 +37,7 @@ namespace VSPhone
         static public void udp_deal(byte[] ip, int source_port, byte[] buff, int len)
         {
             VsProtocol.Pack pack = new VsProtocol.Pack(buff);
-            if (ArrayDeal.vs_strstr(Form1.PublicHead, pack.PublicHead, 10) == 0 )//&&
+            if (ArrayDeal.vs_strstr(CallTabPage.PublicHead, pack.PublicHead, 10) == 0)//&&
             //    ArrayDeal.vs_strstr(onvif_manage.PublicHead, pack.PublicHead, 10) == 0)
 	        {
 		        //printf("public head no match\r\n");
