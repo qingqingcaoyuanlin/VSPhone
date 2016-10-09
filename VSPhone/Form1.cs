@@ -96,9 +96,7 @@ namespace VSPhone
                                         )ENGINE=MyISAM  DEFAULT CHARSET=gbk AUTO_INCREMENT=4";
                 MySqlCommand sqlcom = new MySqlCommand(comstr, sqlconn);
                 sqlconn.Open();
-                sqlcom.ExecuteNonQuery();
-                sqlconn.Close();
-
+                sqlcom.ExecuteNonQuery();               
             }
             catch (Exception e)
             {

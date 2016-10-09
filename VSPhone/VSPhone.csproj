@@ -83,6 +83,7 @@
       <DependentUpon>CallTabPage.cs</DependentUpon>
     </Compile>
     <Compile Include="ConnectStat.cs" />
+    <Compile Include="DataBase.cs" />
     <Compile Include="DeviceList.cs">
       <SubType>Form</SubType>
     </Compile>
