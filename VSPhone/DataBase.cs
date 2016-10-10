@@ -11,6 +11,7 @@ namespace VSPhone
         public const string DBName = "vsphone";
         public const string DeviceTable = "devicelist";
 
+
         public enum
         {
             IS,
