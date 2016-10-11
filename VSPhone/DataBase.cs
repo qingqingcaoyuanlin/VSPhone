@@ -12,17 +12,22 @@ namespace VSPhone
         public const string DeviceTable = "devicelist";
 
 
-        public enum
+
+        public struct DevTable
         {
-            IS,
-            MiniOS,
-            OS,
-            GU
-        }
-        public struct DevTable 
-        { 
-            string 
-        }
+            string ProjectNum;      //项目编号
+            string Header;          //头
+            string DeviceType;      //设备类型
+            string DeviceNum;       //设备号码
+        };
+        public struct RecordTable
+        {
+            DevTable devTbl;
+            string CalledTime;      //开始呼叫的时间
+            int SettingTime;        //设置呼叫的时间（1-120S）
+            int duration;           //呼叫持续的时间（1-120S）
+        };
+
         public void CreatDB(string dbName)
         { 
             string connstr = "server=localhost;user id=root;pwd=1234;port=3306;database="+dbName;       
@@ -156,5 +161,102 @@ namespace VSPhone
         
         
         }
+
+        private static string connectionString = ConfigurationManager.ConnectionStrings["mysqlconn"].ConnectionString;
+        /// <summary>  
+        /// 执行查询语句，返回DataSet  
+        /// </summary>  
+        /// <param name="SQLString">查询语句</param>  
+        /// <returns>DataSet</returns>  
+        public static DataSet Query(string SQLString)
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                DataSet ds = new DataSet();
+                try
+                {
+                    connection.Open();
+                    MySqlDataAdapter command = new MySqlDataAdapter(SQLString, connection);
+                    command.Fill(ds);
+                }
+                catch (System.Data.SqlClient.SqlException ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+                return ds;
+            }
+        }
+        /// <summary>  
+        /// 执行SQL语句，返回影响的记录数  
+        /// </summary>  
+        /// <param name="SQLString">SQL语句</param>  
+        /// <returns>影响的记录数</returns>  
+        public static int ExecuteSql(string SQLString)
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                using (MySqlCommand cmd = new MySqlCommand(SQLString, connection))
+                {
+                    try
+                    {
+                        connection.Open();
+                        int rows = cmd.ExecuteNonQuery();
+                        return rows;
+                    }
+                    catch (System.Data.SqlClient.SqlException e)
+                    {
+                        connection.Close();
+                        throw e;
+                    }
+                    finally
+                    {
+                        cmd.Dispose();
+                        connection.Close();
+                    }
+                }
+            }
+        }
+        /// <summary>  
+        /// 执行SQL语句，返回影响的记录数  
+        /// </summary>  
+        /// <param name="SQLString">SQL语句</param>  
+        /// <returns>影响的记录数</returns>  
+        public static int ExecuteSql(string[] arrSql)
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+
+                try
+                {
+                    connection.Open();
+                    MySqlCommand cmdEncoding = new MySqlCommand(SET_ENCODING, connection);
+                    cmdEncoding.ExecuteNonQuery();
+                    int rows = 0;
+                    foreach (string strN in arrSql)
+                    {
+                        using (MySqlCommand cmd = new MySqlCommand(strN, connection))
+                        {
+                            rows += cmd.ExecuteNonQuery();
+                        }
+                    }
+                    return rows;
+                }
+                catch (System.Data.SqlClient.SqlException e)
+                {
+                    connection.Close();
+                    throw e;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+        }  
+  
+
     }
 }

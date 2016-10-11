@@ -91,7 +91,20 @@ namespace VSPhone
             }
 
         }
+        public void Call_IndoorStation(string devNum)
+        {
+            try
+            {
+                string[] num = devNum.Split(new char[] { '-' });
+                byte[] callId = new byte[] { (byte)VsProtocol.DevType.DEV_INDOORPHONE, Convert.ToByte(num[0]), Convert.ToByte(num[1]), Convert.ToByte(num[2]), Convert.ToByte(num[3]), 1 };
+                talkback.call_out(callId, 0, null);
+            }
+            catch
+            {
+                MessageBox.Show("格式错误");
+            }
 
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             try

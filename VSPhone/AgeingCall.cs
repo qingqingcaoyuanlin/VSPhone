@@ -33,5 +33,10 @@ namespace VSPhone
         {
 
         }
+
+        public void Ageing_Call_Device()
+        { 
+        
+        }
     }
 }
