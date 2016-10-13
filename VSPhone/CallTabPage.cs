@@ -105,6 +105,71 @@ namespace VSPhone
             }
 
         }
+        public void Call_GU(string devNum)
+        { 
+            
+        
+        }
+        public void Monitor_OS(string devNum)
+        {
+            string[] num = null;
+            try
+            {
+                num = textBox1.Text.Split(new char[] { '-' });
+                if (num.Length == 3)
+                {
+                    byte[] callId = new byte[] { (byte)VsProtocol.DevType.DEV_DOORSTATION, Convert.ToByte(num[0]), Convert.ToByte(num[1]), 0, Convert.ToByte(num[2]), 1 };
+                    talkback.build_monitor(callId);
+                }               
+                else
+                {
+                    return;
+                }
+
+
+            }
+            catch
+            {
+                MessageBox.Show("格式错误");
+                return;
+            }
+        }
+
+        public void Monitor_MiniOS(string devNum)
+        {
+            string[] num = null;
+            try
+            {
+                num = textBox1.Text.Split(new char[] { '-' });
+                if (num.Length == 4)
+                {
+                    byte[] callId = new byte[] { (byte)VsProtocol.DevType.DEV_SECONDOORSTATION, Convert.ToByte(num[0]), Convert.ToByte(num[1]), Convert.ToByte(num[2]), Convert.ToByte(num[3]), 1 };
+                    talkback.build_monitor(callId);
+                }
+                else
+                {
+                    return;
+                }
+            }
+            catch
+            {
+                MessageBox.Show("格式错误");
+                return;
+            }
+        }
+
+        public void Hand_up()      //挂断
+        {
+            if (ConnectStat.NewCallFlag > 0)
+            {
+                talkback.handup(0, 1);
+                //Change_To_NewCall_Ring();
+            }
+            else
+            {
+                talkback.handup(0, 0);
+            }
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             try

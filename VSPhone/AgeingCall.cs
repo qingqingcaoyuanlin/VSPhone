@@ -22,11 +22,13 @@ namespace VSPhone
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             int CallTime = trackBar1.Value;
+            textBox1.Text = CallTime.ToString();
+
         }
 
         private void button1_Click(object sender, EventArgs e)  //开始键
         {
-
+            AppTimer.start_timer(AppTimer.register_timer(null, ));
         }
 
         private void button2_Click(object sender, EventArgs e)  //结束键
