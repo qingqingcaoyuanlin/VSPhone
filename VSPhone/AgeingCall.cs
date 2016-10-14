@@ -24,6 +24,8 @@ namespace VSPhone
             int CallTime = trackBar1.Value;
             textBox1.Text = CallTime.ToString();
 
+
+
         }
 
         private void button1_Click(object sender, EventArgs e)  //开始键
