@@ -78,7 +78,7 @@ namespace VSPhone
         public bool Check_MySql()
         {
             
-            
+            /*
             string connstr = "server=localhost;user id=root;pwd=1234;port=3306;database="+dbName;       
             MySqlConnection sqlconn = new MySqlConnection();
             sqlconn.ConnectionString = connstr;
@@ -110,7 +110,20 @@ namespace VSPhone
             }
             Console.WriteLine("DB Exit");
             return true;
-
+             */
+            
+            MySqlConnection connect = DataBase.GetMySqlConnection();
+            String sqlSearch = "select * from " + DataBase.DeviceTable;
+            String sqlInsert = "insert into device values (null,'SR621','123',345,'123')";
+            String sqlDel = "delete from device where ProjectCode='ABB' && Header='123'";
+            MySqlCommand cmd = DataBase.GetMySqlCommand(sqlSearch,connect);
+            MySqlCommand cmdInsert = DataBase.GetMySqlCommand(sqlInsert, connect);
+            MySqlCommand cmdDel = DataBase.GetMySqlCommand(sqlDel, connect);
+            connect.Open();
+            DataBase.query(cmd);
+            DataBase.GetExecuteCMD(cmdDel);
+            connect.Close();          
+            return true;
         }
         
     }

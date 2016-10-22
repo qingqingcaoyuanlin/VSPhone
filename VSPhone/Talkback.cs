@@ -572,10 +572,12 @@ namespace VSPhone
                         if (ConnectStat.Busy_Flag > 0)
                         {
                             send_handup_msg(HANDUP_TYPE.TYPE_BUSY);		//正忙
+                            set_talkback_state(STA.STA_NORMAL_STANDBY);
                         }
                         else
                         {
                             send_handup_msg(HANDUP_TYPE.TYPE_NO_ANSWER);	//无应答
+                            set_talkback_state(STA.STA_NORMAL_STANDBY);
                         }
                     }
                 }
