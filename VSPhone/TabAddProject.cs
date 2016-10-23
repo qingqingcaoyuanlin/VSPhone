@@ -20,7 +20,7 @@ namespace VSPhone
             InitializeComponent();
             InitSetting();
         }
-        public void InitSetting()
+        private void InitSetting()
         {            
             object[]comText = new object[]{"IS","OS","MiniOS","GU"};
             comboBox1.Items.AddRange(comText);
@@ -28,6 +28,7 @@ namespace VSPhone
             DataTable dt = new DataTable();
             dt = DataBase.queryTable(DataBase.DeviceTable);
             dataGridView1.DataSource = dt;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
         private void button1_Click(object sender, EventArgs e)
         {

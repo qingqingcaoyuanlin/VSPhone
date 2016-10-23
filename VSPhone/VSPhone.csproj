@@ -80,6 +80,12 @@
       <DependentUpon>AutoCall.cs</DependentUpon>
     </Compile>
     <Compile Include="BcdDeal.cs" />
+    <Compile Include="CallRecord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CallRecord.Designer.cs">
+      <DependentUpon>CallRecord.cs</DependentUpon>
+    </Compile>
     <Compile Include="CallTabPage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,11 +94,23 @@
     </Compile>
     <Compile Include="ConnectStat.cs" />
     <Compile Include="DataBase.cs" />
+    <Compile Include="DataRecord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DataRecord.Designer.cs">
+      <DependentUpon>DataRecord.cs</DependentUpon>
+    </Compile>
     <Compile Include="DeviceList.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="DeviceList.Designer.cs">
       <DependentUpon>DeviceList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DeviceRecord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DeviceRecord.Designer.cs">
+      <DependentUpon>DeviceRecord.cs</DependentUpon>
     </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -135,11 +153,20 @@
     <EmbeddedResource Include="AutoCall.resx">
       <DependentUpon>AutoCall.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CallRecord.resx">
+      <DependentUpon>CallRecord.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CallTabPage.resx">
       <DependentUpon>CallTabPage.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DataRecord.resx">
+      <DependentUpon>DataRecord.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DeviceList.resx">
       <DependentUpon>DeviceList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DeviceRecord.resx">
+      <DependentUpon>DeviceRecord.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

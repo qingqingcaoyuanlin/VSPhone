@@ -23,22 +23,31 @@ namespace VSPhone
     {
         public static byte[] PublicHead;
         //public Phone Phone1 = new Phone();
-        public AutoCall autoCall = new AutoCall();
+        //public AutoCall autoCall = new AutoCall();
         public Form1()
         {
             InitializeComponent();
             Form1_Load();
 
         }
-        public void Form1_Load()
+        private void Form1_Load()
         { 
             
             
             tabPage1.Text = "声音测试";
             tabPage1.Name = "VoiceTest";
+            AutoCall autoCall = new AutoCall();
             autoCall.TopLevel = false;
             tabPage1.Controls.Add(autoCall);
             autoCall.Show();
+
+            tabPage2.Text = "数据记录";
+            tabPage2.Name = "Record";
+            DataRecord dataRecord = new DataRecord();
+            dataRecord.TopLevel = false;
+            tabPage2.Controls.Add(dataRecord);
+            dataRecord.Show();
+
 
             //ReadXML xml = new ReadXML();
             Check_MySql();

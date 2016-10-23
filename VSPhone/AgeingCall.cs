@@ -18,7 +18,7 @@ namespace VSPhone
         }
         static List<DataBase.DevStruct> callList = new List<DataBase.DevStruct>();
         static int index = 0;
-        public void InitSetting()
+        private void InitSetting()
         {
             callList = DataBase.QueryDBDevice();            
         }

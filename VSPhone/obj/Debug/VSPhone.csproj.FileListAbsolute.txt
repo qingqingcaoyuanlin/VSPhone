@@ -162,3 +162,6 @@ F:\VSPhone\VSPhone\VSPhone\bin\Debug\VSPhone.exe
 F:\VSPhone\VSPhone\VSPhone\bin\Debug\VSPhone.pdb
 F:\VSPhone\VSPhone\VSPhone\bin\Debug\Interop.WMPLib.dll
 F:\VSPhone\VSPhone\VSPhone\bin\Debug\AxInterop.WMPLib.dll
+F:\VSPhone\VSPhone\VSPhone\obj\Debug\VSPhone.CallRecord.resources
+F:\VSPhone\VSPhone\VSPhone\obj\Debug\VSPhone.DataRecord.resources
+F:\VSPhone\VSPhone\VSPhone\obj\Debug\VSPhone.DeviceRecord.resources

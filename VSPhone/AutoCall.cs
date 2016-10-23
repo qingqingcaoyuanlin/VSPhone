@@ -17,7 +17,7 @@ namespace VSPhone
             AutoCall_Load();
 
         }
-        public void AutoCall_Load()
+        private void AutoCall_Load()
         {
             tabPage1.Text = "声音测试";
             tabPage1.Name = "VoiceTest";
