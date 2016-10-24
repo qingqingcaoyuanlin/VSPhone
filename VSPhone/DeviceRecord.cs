@@ -77,7 +77,8 @@ namespace VSPhone
             dr.Delete();
             MySqlCommandBuilder mscb = new MySqlCommandBuilder(adapter);
             adapter.Update(dataTable);
-
+            AgeingCall.callList.Clear();
+            AgeingCall.callList = DataBase.QueryDBDevice(); 
         }
 
         private void button3_Click(object sender, EventArgs e)  //修改/或者添加
@@ -88,6 +89,9 @@ namespace VSPhone
 
             MySqlCommandBuilder mscb = new MySqlCommandBuilder(adapter);
             adapter.Update(dataTable);
+            AgeingCall.callList.Clear();
+            AgeingCall.callList = DataBase.QueryDBDevice(); 
+
         }
 
         private void button4_Click(object sender, EventArgs e)  //清空
@@ -97,6 +101,8 @@ namespace VSPhone
             {
                 MessageBox.Show("清空成功");
                 dataTable.Clear();
+                AgeingCall.callList.Clear();
+                AgeingCall.Stop_Auto_Call();
             }
             else
             {

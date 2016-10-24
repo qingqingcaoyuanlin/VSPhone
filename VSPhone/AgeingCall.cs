@@ -16,7 +16,7 @@ namespace VSPhone
             InitializeComponent();
             InitSetting();
         }
-        static List<DataBase.DevStruct> callList = new List<DataBase.DevStruct>();
+        static public List<DataBase.DevStruct> callList = new List<DataBase.DevStruct>();
         static int index = 0;
         private void InitSetting()
         {
@@ -28,26 +28,32 @@ namespace VSPhone
             textBox1.Text = CallTime.ToString();
 
         }
-
+        public void Start_Auto_Call()
+        {
+            AppTimer.start_timer(AppTimer.register_timer(null, T_Check_AutoCall, 0, null, 1000, 0));
+            index = 0;
+        }
         private void button1_Click(object sender, EventArgs e)  //开始键
         {
             if(AppTimer.search_timer_by_func(T_Check_AutoCall)==null)
             {
-                AppTimer.start_timer(AppTimer.register_timer(null, T_Check_AutoCall, 0, null,1000, 0));
-                index = 0;
+                Start_Auto_Call();
             }
             
         }
-
+        static public void Stop_Auto_Call()
+        {
+            AppTimer.stop_timer(AppTimer.search_timer_by_func(T_Check_AutoCall));
+            index = 0;
+        }
         private void button2_Click(object sender, EventArgs e)  //结束键
         {
             if (AppTimer.search_timer_by_func(T_Check_AutoCall) != null)
             {
-                AppTimer.stop_timer(AppTimer.search_timer_by_func(T_Check_AutoCall));
-                index = 0;
+                Stop_Auto_Call();                
             }
         }
-        public void Call_IndoorStation(string devNum)
+        static public void Call_IndoorStation(string devNum)
         {
             try
             {
@@ -63,17 +69,18 @@ namespace VSPhone
             }
 
         }
-        public void Call_GU(string devNum)
+        static public void Call_GU(string devNum)
         { 
             
         
         }
-        public void Monitor_OS(string devNum)
+        static public void Monitor_OS(string devNum)
         {
             string[] num = null;
             try
             {
                 num = textBox1.Text.Split(new char[] { '-' });
+                
                 if (num.Length == 3)
                 {
                     byte[] callId = new byte[] { (byte)VsProtocol.DevType.DEV_DOORSTATION, Convert.ToByte(num[0]), Convert.ToByte(num[1]), 0, Convert.ToByte(num[2]), 1 };
@@ -93,7 +100,7 @@ namespace VSPhone
             }
         }
 
-        public void Monitor_MiniOS(string devNum)
+        static public void Monitor_MiniOS(string devNum)
         {
             string[] num = null;
             try
@@ -115,11 +122,11 @@ namespace VSPhone
                 return;
             }
         }
-        void T_Pick(int argc, object argv)
+        static void T_Pick(int argc, object argv)
         {
             CallTabPage.talkback.pick();
         }
-        public void AutoCall()
+        static public void AutoCall()
         {
             
             DataBase.DevStruct dev;
@@ -151,7 +158,7 @@ namespace VSPhone
             }
 
         }
-        public void T_Check_AutoCall(int argc, object argv)
+        static public void T_Check_AutoCall(int argc, object argv)
         {
             if (CallTabPage.talkback.get_talkback_state() == Talkback.STA.STA_NORMAL_STANDBY)
             {
