@@ -67,6 +67,7 @@ namespace VSPhone
                 index = 0;
             }
             dev = callList[index++];
+            CallTabPage.talkback.audioDeal.projName = dev.Header;
             switch(dev.DeviceType)
             {
                 case "IS":
