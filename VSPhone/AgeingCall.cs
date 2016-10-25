@@ -53,6 +53,54 @@ namespace VSPhone
                 Stop_Auto_Call();                
             }
         }
+        
+        static void T_Pick(int argc, object argv)
+        {
+            CallTabPage.talkback.pick();
+        }
+        static public void AutoCall()
+        {
+            
+            DataBase.DevStruct dev;
+            if(index > callList.Count()-1)
+            {
+                index = 0;
+            }
+            dev = callList[index++];
+            switch(dev.DeviceType)
+            {
+                case "IS":
+                    CallFunc.Call_IndoorStation(dev.DeviceNum);
+                    break;
+                case "GU":
+                    CallFunc.Call_GU(dev.DeviceNum);
+                    break;
+                case "MiniOS":
+                    CallFunc.Monitor_MiniOS(dev.DeviceNum);
+                    AppTimer.start_timer(AppTimer.register_timer(null, T_Pick, 0, null, 4000,1));
+                    break;
+                case "OS":
+                    CallFunc.Monitor_OS(dev.DeviceNum);
+                    AppTimer.start_timer(AppTimer.register_timer(null, T_Pick, 0, null, 4000, 1));
+                    break;
+                default:
+
+                    break;
+
+            }
+
+        }
+        static public void T_Check_AutoCall(int argc, object argv)
+        {
+            if (CallTabPage.talkback.get_talkback_state() == Talkback.STA.STA_NORMAL_STANDBY)
+            {
+                AutoCall();
+            }
+        }
+        
+    }
+    public static class CallFunc
+    {
         static public void Call_IndoorStation(string devNum)
         {
             try
@@ -60,8 +108,8 @@ namespace VSPhone
                 string[] num = devNum.Split(new char[] { '-' });
                 byte[] callId = new byte[] { (byte)VsProtocol.DevType.DEV_INDOORPHONE, Convert.ToByte(num[0]), Convert.ToByte(num[1]), Convert.ToByte(num[2]), Convert.ToByte(num[3]), 1 };
                 CallTabPage.talkback.call_out(callId, 0, null);
-                
-                
+
+
             }
             catch
             {
@@ -70,22 +118,22 @@ namespace VSPhone
 
         }
         static public void Call_GU(string devNum)
-        { 
-            
-        
+        {
+
+
         }
         static public void Monitor_OS(string devNum)
         {
             string[] num = null;
             try
             {
-                num = textBox1.Text.Split(new char[] { '-' });
-                
+                num = devNum.Split(new char[] { '-' });
+
                 if (num.Length == 3)
                 {
                     byte[] callId = new byte[] { (byte)VsProtocol.DevType.DEV_DOORSTATION, Convert.ToByte(num[0]), Convert.ToByte(num[1]), 0, Convert.ToByte(num[2]), 1 };
                     CallTabPage.talkback.build_monitor(callId);
-                }               
+                }
                 else
                 {
                     return;
@@ -105,7 +153,7 @@ namespace VSPhone
             string[] num = null;
             try
             {
-                num = textBox1.Text.Split(new char[] { '-' });
+                num = devNum.Split(new char[] { '-' });
                 if (num.Length == 4)
                 {
                     byte[] callId = new byte[] { (byte)VsProtocol.DevType.DEV_SECONDOORSTATION, Convert.ToByte(num[0]), Convert.ToByte(num[1]), Convert.ToByte(num[2]), Convert.ToByte(num[3]), 1 };
@@ -122,49 +170,9 @@ namespace VSPhone
                 return;
             }
         }
-        static void T_Pick(int argc, object argv)
+        static void Pick()
         {
             CallTabPage.talkback.pick();
         }
-        static public void AutoCall()
-        {
-            
-            DataBase.DevStruct dev;
-            if(index > callList.Count()-1)
-            {
-                index = 0;
-            }
-            dev = callList[index++];
-            switch(dev.DeviceType)
-            {
-                case "IS":
-                    Call_IndoorStation(dev.DeviceNum);
-                    break;
-                case "GU":
-                    Call_GU(dev.DeviceNum);
-                    break;
-                case "MiniOS":
-                    Monitor_MiniOS(dev.DeviceNum);
-                    AppTimer.start_timer(AppTimer.register_timer(null, T_Pick, 0, null, 4000,1));
-                    break;
-                case "OS":
-                    Monitor_OS(dev.DeviceNum);
-                    AppTimer.start_timer(AppTimer.register_timer(null, T_Pick, 0, null, 4000, 1));
-                    break;
-                default:
-
-                    break;
-
-            }
-
-        }
-        static public void T_Check_AutoCall(int argc, object argv)
-        {
-            if (CallTabPage.talkback.get_talkback_state() == Talkback.STA.STA_NORMAL_STANDBY)
-            {
-                AutoCall();
-            }
-        }
-        
     }
 }
