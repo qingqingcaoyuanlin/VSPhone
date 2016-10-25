@@ -37,7 +37,16 @@ namespace VSPhone
         {
             if(AppTimer.search_timer_by_func(T_Check_AutoCall)==null)
             {
-                Start_Auto_Call();
+                if(DataBase.QueryDBDevice().Count > 0)      //数据库记录>0
+                {
+                    Console.WriteLine("Data Not Empty");
+                    Start_Auto_Call();
+                }
+                else
+                {
+                    MessageBox.Show("数据库为空，请添加设备");
+                }
+                
             }
             
         }
