@@ -26,12 +26,19 @@ namespace VSPhone
         {
             int CallTime = trackBar1.Value;
             textBox1.Text = CallTime.ToString();
+            Console.WriteLine(CallTime.ToString());
 
         }
+
         public void Start_Auto_Call()
         {
             AppTimer.start_timer(AppTimer.register_timer(null, T_Check_AutoCall, 0, null, 1000, 0));
             index = 0;
+        }
+        public void AutoHandup()        //自动挂断
+        {
+
+
         }
         private void button1_Click(object sender, EventArgs e)  //开始键
         {
