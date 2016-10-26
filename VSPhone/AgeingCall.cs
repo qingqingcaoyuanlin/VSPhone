@@ -18,13 +18,14 @@ namespace VSPhone
         }
         static public List<DataBase.DevStruct> callList = new List<DataBase.DevStruct>();
         static int index = 0;
+        static int CallTime = 120;
         private void InitSetting()
         {
             callList = DataBase.QueryDBDevice();            
         }
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            int CallTime = trackBar1.Value;
+            CallTime = trackBar1.Value;
             textBox1.Text = CallTime.ToString();
             Console.WriteLine(CallTime.ToString());
 
@@ -73,6 +74,22 @@ namespace VSPhone
         static void T_Pick(int argc, object argv)
         {
             CallTabPage.talkback.pick();
+            AppTimer.start_timer(AppTimer.register_timer(null, T_Handup, 0, null, CallTime * 800, 1));      //定时挂机
+        }
+        /// <summary>
+        /// 定时挂机
+        /// </summary>
+        static void T_Handup(int argc, object argv)
+        {
+            if (ConnectStat.NewCallFlag > 0)
+            {
+                CallTabPage.talkback.handup(0, 1);
+                //Change_To_NewCall_Ring();
+            }
+            else
+            {
+                CallTabPage.talkback.handup(0, 0);
+            }
         }
         static public void AutoCall()
         {
@@ -88,9 +105,11 @@ namespace VSPhone
             {
                 case "IS":
                     CallFunc.Call_IndoorStation(dev.DeviceNum);
+                    AppTimer.start_timer(AppTimer.register_timer(null, T_Handup,0, null, CallTime * 800,1));
                     break;
                 case "GU":
                     CallFunc.Call_GU(dev.DeviceNum);
+                    AppTimer.start_timer(AppTimer.register_timer(null, T_Handup, 0, null, CallTime * 800, 1));
                     break;
                 case "MiniOS":
                     CallFunc.Monitor_MiniOS(dev.DeviceNum);
