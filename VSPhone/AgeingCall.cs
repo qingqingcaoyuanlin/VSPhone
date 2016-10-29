@@ -33,7 +33,7 @@ namespace VSPhone
 
         public void Start_Auto_Call()
         {
-            AppTimer.start_timer(AppTimer.register_timer(null, T_Check_AutoCall, 0, null, 1000, 0));
+            AppTimer.start_timer(AppTimer.register_timer(null, T_Check_AutoCall, 0, null, 2000, 0));
             index = 0;
         }
         public void AutoHandup()        //自动挂断
