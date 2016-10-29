@@ -19,19 +19,19 @@ namespace VSPhone
             UdpApp.talkback = talkback;
             stat_fun = new StatFun[]
             {
-                talkback.STA_NORMAL_STANDBY_Deal,
-                talkback.STA_WAIT_CALL_REPLY_Deal,
-                talkback.STA_WAIT_PICK_Deal,
-                talkback.STA_WAIT_PICK_ASK_Deal,
-                talkback.STA_WAIT_PICK_REPLY_Deal,
-                talkback.STA_WAIT_MONITOR_REPLY_Deal,
-                talkback.STA_MONITOR_STAT_Deal,
-                talkback.STA_MONITOR_CALL_Deal,
-                talkback.STA_WAIT_HANDUP_REPLY_Deal,
-                talkback.STA_CALLING_Deal,
-                talkback.STA_INDOOR_PAGING_Deal,
-                talkback.STA_WAIT_RADIO_REPLY_Deal,
-                talkback.STA_WAIT_TRANS_REPLY_Deal,
+                talkback.STA_NORMAL_STANDBY_Deal,           //待机
+                talkback.STA_WAIT_CALL_REPLY_Deal,          //呼叫，等待应答
+                talkback.STA_WAIT_PICK_Deal,                //等待主动摘机，通常是监视
+                talkback.STA_WAIT_PICK_ASK_Deal,            //等待对方摘机
+                talkback.STA_WAIT_PICK_REPLY_Deal,          //对方摘机了
+                talkback.STA_WAIT_MONITOR_REPLY_Deal,       //进行监视
+                talkback.STA_MONITOR_STAT_Deal,             //监视
+                talkback.STA_MONITOR_CALL_Deal,             //监视、通话
+                talkback.STA_WAIT_HANDUP_REPLY_Deal,        //等待挂机应答
+                talkback.STA_CALLING_Deal,                  //通话状态
+                talkback.STA_INDOOR_PAGING_Deal,            //广播
+                talkback.STA_WAIT_RADIO_REPLY_Deal,         //广播
+                talkback.STA_WAIT_TRANS_REPLY_Deal,         //呼叫转移
             };
         }
         static public void udp_deal(byte[] ip, int source_port, byte[] buff, int len)
