@@ -102,7 +102,7 @@ namespace VSPhone
                 MessageBox.Show("清空成功");
                 dataTable.Clear();
                 AgeingCall.callList.Clear();
-                AgeingCall.Stop_Auto_Call();
+                AgeingCall.callFunc.Stop_Call();
             }
             else
             {
