@@ -14,7 +14,8 @@ namespace VSPhone
         public const string DBName = "vsphone";
         public const string DeviceTable = "device";
         public const string RecordTable = "record";
-               
+        static public DevStruct devStruct;
+        static public RecordStruct recordStruct;
        
         public struct DevStruct
         {
@@ -27,9 +28,64 @@ namespace VSPhone
         public struct RecordStruct
         {
             public DevStruct dev;
-            public string CalledTime;      //开始呼叫的时间
-            public int SettingTime;        //设置呼叫的时间（1-120S）
-            public int duration;           //呼叫持续的时间（1-120S）
+            public string TimeStart;        //开始呼叫的时间
+            public int CallPeriodSet;       //设置呼叫的时间（1-30S）
+            public int CallPeriod;          //实际呼叫时长
+            public bool CallSucceed;        //呼叫是否成功，实际与设置的比较
+            public bool Pickup;             //对方中途有人摘机
+            public int TalkPeriodSet;       //设置通话的时间（1-120S）
+            public int TalkPeriod;          //实际通话时长
+            public bool TalkSucceed;        //通话是否成功，实际与设置的比较
+            public string TimeEnd;          //结束的时间（呼叫或者通话）
+        }
+        static public void ClearRecordStruct()
+        {
+            recordStruct.dev.ProjectCode = null;
+            recordStruct.dev.Header = null;
+            recordStruct.dev.DeviceType = null;
+            recordStruct.dev.DeviceNum = null;
+            recordStruct.TimeStart = null;
+            recordStruct.CallPeriodSet = 0;
+            recordStruct.CallPeriod = 0;
+            recordStruct.CallSucceed = false;
+            recordStruct.TalkPeriodSet = 0;
+            recordStruct.TalkPeriod = 0;
+            recordStruct.TalkSucceed = false;
+            recordStruct.TimeEnd = null;
+
+        }
+        static public string CreateRecordString()
+        {
+            string str;
+            str = "'" + recordStruct.dev.ProjectCode + "','" + recordStruct.dev.Header + "','" + recordStruct.dev.DeviceType + "','" + recordStruct.dev.DeviceNum + "','" + recordStruct.TimeStart + "','"+ recordStruct.CallPeriodSet +"','" + recordStruct.CallPeriod + "','";
+            if(recordStruct.CallSucceed)
+            {
+                str += "1','";
+            }
+            else
+            {
+                str += "0','";
+            }
+            if (recordStruct.Pickup)
+            {
+                str += "1','";
+            }
+            else
+            {
+                str += "0','";
+            }
+            str += recordStruct.TalkPeriodSet + "','" + recordStruct.TalkPeriod + "','";
+            if(recordStruct.TalkSucceed)
+            {
+                str += "1','";
+            }
+            else
+            {
+                str += "0','";
+            }
+            str += recordStruct.TimeEnd + "'";
+            ClearRecordStruct();
+            return str;
         }
 
         public void CreatDB(string dbName)
