@@ -30,14 +30,14 @@ namespace VSPhone
 
         private void trackBar1_Scroll(object sender, EventArgs e)   //通话时间
         {
-            TalkTime = trackBar2.Value;
-            textBox2.Text = TalkTime.ToString();
+            TalkTime = trackBar1.Value;
+            textBox1.Text = TalkTime.ToString();
             Console.WriteLine(TalkTime.ToString());
         }
         private void trackBar2_Scroll(object sender, EventArgs e)   //呼叫时间
         {
-            CallTime = trackBar1.Value;
-            textBox1.Text = CallTime.ToString();
+            CallTime = trackBar2.Value;
+            textBox2.Text = CallTime.ToString();
             Console.WriteLine(CallTime.ToString());
 
         }
@@ -48,7 +48,7 @@ namespace VSPhone
             
             if(DataBase.QueryDBDevice().Count > 0)      //数据库记录>0
             {
-                Console.WriteLine("Data Not Empty");
+                Console.WriteLine("Data Not Empty");                
                 callFunc.Start_Call();
             }
             else
@@ -76,8 +76,7 @@ namespace VSPhone
             {
                 this.label2.Text = str;
             }));
-        }     
-        
+        }                
     }
     public class CallFunc
     {
@@ -169,13 +168,16 @@ namespace VSPhone
             dev = AgeingCall.callList[AgeingCall.index++];
             CallTabPage.talkback.audioDeal.projName = dev.Header;
             string Calling;
+            string time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            DataBase.recordStruct.TimeStart = time;
+            DataBase.recordStruct.dev = dev;
+            DataBase.recordStruct.CallPeriodSet = AgeingCall.CallTime;
             switch (dev.DeviceType)
             {
                 case "IS":
-                    Calling = "呼叫" + dev.DeviceType + ":" + dev.DeviceNum;
-                    AgeingCall.
-                    Call_IndoorStation(dev.DeviceNum);
-                    AppTimer.start_timer(AppTimer.register_timer(null, T_Handup, 0, null, AgeingCall.CallTime * 800, 1));
+                    Calling = "呼叫" + dev.DeviceType + ":" + dev.DeviceNum;                    
+                    Call_IndoorStation(dev.DeviceNum);                                       
+                    AppTimer.start_timer(AppTimer.register_timer(null, T_Handup, 0, null, AgeingCall.CallTime * 800, 1));                                                            
                     break;
                 case "GU":
                     Calling = "呼叫" + dev.DeviceType + ":" + dev.DeviceNum;
@@ -221,6 +223,17 @@ namespace VSPhone
             if(AppTimer.search_timer_by_func(T_Check_AutoCall)==null)
             {
                 Start_Auto_Call();
+            }
+        }
+        public bool CheckStateAgeing()
+        {
+            if(AppTimer.search_timer_by_func(T_Check_AutoCall)==null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
             }
         }
         static void T_Pick(int argc, object argv)
