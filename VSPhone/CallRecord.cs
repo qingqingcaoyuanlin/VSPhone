@@ -15,5 +15,9 @@ namespace VSPhone
         {
             InitializeComponent();
         }
+        public void InitSetting()
+        { 
+        
+        }
     }
 }
