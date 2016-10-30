@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 60011
 File Encoding         : 65001
 
-Date: 2016-10-22 12:42:27
+Date: 2016-10-30 19:54:53
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -27,9 +27,6 @@ CREATE TABLE `device` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of device
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for `record`
@@ -41,12 +38,17 @@ CREATE TABLE `record` (
   `Header` char(60) DEFAULT NULL,
   `DeviceType` char(20) DEFAULT NULL,
   `DeviceNum` char(20) DEFAULT NULL,
-  `Time` datetime DEFAULT NULL,
-  `SetPeriod` int(1) DEFAULT NULL,
-  `CallPeriod` int(1) DEFAULT NULL,
-  `Succeed` bit(1) DEFAULT NULL,
+  `TimeStart` datetime DEFAULT NULL,
+  `CallPeriodSet` int(2) unsigned zerofill DEFAULT NULL,
+  `CallPeriod` int(2) DEFAULT NULL,
+  `CallSucceed` tinyint(1) DEFAULT NULL,
+  `Pickup` tinyint(1) DEFAULT NULL,
+  `TalkPeriodSet` int(3) DEFAULT NULL,
+  `TalkPeriod` int(3) DEFAULT NULL,
+  `TalkSucceed` tinyint(1) DEFAULT NULL,
+  `TimeEnd` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of record
