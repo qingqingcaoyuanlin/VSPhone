@@ -578,6 +578,17 @@ namespace VSPhone
                         {
                             send_handup_msg(HANDUP_TYPE.TYPE_NO_ANSWER);	//无应答
                             set_talkback_state(STA.STA_NORMAL_STANDBY);
+                            if(AgeingCall.callFunc.CheckStateAgeing())
+                            {
+                                Console.WriteLine("测试无应答");
+                                DataBase.recordStruct.CallSucceed = false;
+                                DataBase.recordStruct.TimeEnd = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                                string cmd = "insert into record values (null,"+DataBase.CreateRecordString() + ")";
+                                Console.WriteLine(cmd);
+                                DataBase.ExcuteCMD(cmd);
+                            }
+                            
+
                         }
                     }
                 }
