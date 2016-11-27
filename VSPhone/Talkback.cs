@@ -604,6 +604,7 @@ namespace VSPhone
             else
             {
                 Console.WriteLine("wait pick reply timeout...\r\n");
+                Output.MessaggeOutput("");
                 //send_handup_msg(TYPE_NO_ANSWER);	//无应答
             }
         }
@@ -632,10 +633,13 @@ namespace VSPhone
                 if (ConnectStat.Busy_Flag > 0)
                 {
                     send_handup_msg(HANDUP_TYPE.TYPE_BUSY);	//线路正忙
+                    Output.MessaggeOutput("监视线路正忙");
                 }
                 else
                 {
                     send_handup_msg(HANDUP_TYPE.TYPE_NO_ANSWER);	 //无应答
+                    Output.MessaggeOutput("监视无应答");
+
                 }
             }
         }
@@ -1426,7 +1430,7 @@ namespace VSPhone
             switch (pack.com)
             {
             case VsProtocol.COM.COM_HANDASK:  //握手指令
-                    if (ArrayDeal.vs_strstr(ConnectStat.Currentalk_IP, FromIP, 4) >0 || (ConnectStat.NewCallFlag > 0 && ArrayDeal.vs_strstr(ConnectStat.NewCall_IP, FromIP, 4)>0))
+                if (ArrayDeal.vs_strstr(ConnectStat.Currentalk_IP, FromIP, 4) >0 || (ConnectStat.NewCallFlag > 0 && ArrayDeal.vs_strstr(ConnectStat.NewCall_IP, FromIP, 4)>0))
                 {
                     Hand_Ask_Deal(pack.SourceAddr, FromIP, DestPort);
                 }
@@ -1779,7 +1783,7 @@ namespace VSPhone
             STA_NORMAL_STANDBY       	,    	//正常待机状态
             STA_WAIT_CALL_REPLY      	,   	//等待呼叫应答状态
             STA_WAIT_PICK             	,   	//等待主动摘机
-            STA_WAIT_PICK_ASK         ,    	//等待对方摘机
+            STA_WAIT_PICK_ASK           ,    	//等待对方摘机
             STA_WAIT_PICK_REPLY      	,   	//等待摘机应答指令
             STA_WAIT_MONITOR_REPLY   	,   	//等待监视应答状态
             STA_MONITOR_STAT         	,  		//监控状态
@@ -1790,7 +1794,7 @@ namespace VSPhone
             STA_WAIT_RADIO_REPLY		,		//等待户内广播应答
             STA_WAIT_TRANS_REPLY		,		//等待呼叫转移应答
             STA_ONVIF_MONITOR			,		//onvif监控状态
-    }
+        }
         public enum HANDUP_TYPE     //挂断类型
         {
 	        TYPE_NORMAL,					//正常挂机
